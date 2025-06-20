@@ -104,21 +104,21 @@ for ilce in ilceler_liste:
 
 while True:
     print("Hangi islemi yapmak istersiniz?\n"
-          "A : Sececeginiz ilcenin 5 gunluk hava durumu degerlerini gorun.\n"
+          "A : Sececeginiz ilce ve gun icin hava durumu degerlerini gorun.\n"
           "B : Yasadiginiz ilce icin onerilen etkinlikleri inceleyin.\n" \
           "Q : Programdan cikin.")
-    islem = input("Seciniz(A,B olarak):").strip().upper()
+    islem = input("Seciniz(A,B,Q olarak):").strip().upper()
 
     if islem == "A":
         while True:
-            print("Hangi ilceyi secmek istersiniz?")
+            print("\nHangi ilceyi secmek istersiniz?")
             for secim,ilce in ilceler_sozluk.items():
                 print(f"{secim} : {ilce}")
             secilen_ilce =input("İlcenin adini yazin:").strip()
             if secilen_ilce in ilceler_liste:
                 break
             else:
-                print("Hatali yazim ya da tanimli olmayan konum, tekrar deneyin!")
+                print("\nHatali yazim ya da tanimli olmayan konum, tekrar deneyin!")
 
         tarihler = []
         for hava in hava_listesi:
@@ -129,14 +129,14 @@ while True:
 
 
         while True:
-            print("Hangi tarihi secmek istersiniz?")
+            print("\nHangi tarihi secmek istersiniz?")
             for index,tarih in enumerate(tarihler):
                 print(f"{index+1} : {tarih}")
             secilen_tarih = input("Tarihi yazilan sekli ile giriniz:").strip()
             if secilen_tarih in tarihler:
                 break
             else:
-                print("Hatali yazim ya da tanimli olmayan tarih, tekrar deneyin!")
+                print("\nHatali yazim ya da tanimli olmayan tarih, tekrar deneyin!\n")
 
 
         def detay_ilce(secilen_ilce,secilen_tarih):
@@ -149,14 +149,14 @@ while True:
 
     elif islem == 'B':
         while True:
-            print("Hangi ilceyi secmek istersiniz?")
+            print("\nHangi ilceyi secmek istersiniz?")
             for secim,ilce in ilceler_sozluk.items():
                 print(f"{secim} : {ilce}")
             secilen_ilce_B =input("İlcenin adini yazin:").strip()
             if secilen_ilce_B in ilceler_liste:
                 break
             else:
-                print("Hatali yazim ya da tanimli olmayan konum, tekrar deneyin!")
+                print("\nHatali yazim ya da tanimli olmayan konum, tekrar deneyin!\n")
 
         tarihler = []
         for hava in hava_listesi:
@@ -167,14 +167,14 @@ while True:
 
 
         while True:
-            print("Hangi tarihi secmek istersiniz?")
+            print("\nHangi tarihi secmek istersiniz?")
             for index,tarih in enumerate(tarihler):
                 print(f"{index+1} : {tarih}")
             secilen_tarih_B = input("Tarihi yazilan sekli ile giriniz:").strip()
             if secilen_tarih_B in tarihler:
                 break
             else:
-                print("Hatali yazim ya da tanimli olmayan tarih, tekrar deneyin!")
+                print("\nHatali yazim ya da tanimli olmayan tarih, tekrar deneyin!")
 
         etkinlikler_firtinali= ["Muzik dinleyebilirsiniz",
                                 "Film izleyebilirsiniz",
@@ -204,7 +204,7 @@ while True:
         etkinlikler_yagmurlu = ["Evde kalin, odanizi düzenleyebilirsiniz. Varsa eğer cicek bakimi yapabilirsiniz."]
 
         etkinlik_ciseleme = ["Cok estetik bir atmosfer olabilir, fotograf cekebilirsiniz.",
-                             "Teraslı bir mekânda sıcak içecekle rahatlayabilirsiniz."]
+                             "Terasli bir mekanda sicak icecekle rahatlayabilirsiniz."]
 
 
     
@@ -217,8 +217,7 @@ while True:
                     pass    
             else:
                 pass
-
-        rastgele_saat = random.choice(saatler)    
+   
 
         def etkinlik_ilce(rastgele_saat,secilen_ilce_B):
             filtrelenmis_nesne = filter(lambda hava: hava.ilce == secilen_ilce_B and hava.dt_txt == rastgele_saat, hava_listesi)
@@ -269,14 +268,23 @@ while True:
             else:
                 return "Tanimlanamayan bir durum, tekrar deneyin!"
         
-        print(etkinlik_ilce(rastgele_saat,secilen_ilce_B))    
+        while True:
+            rastgele_saat = random.choice(saatler)
+            sonuc = etkinlik_ilce(rastgele_saat, secilen_ilce_B)
+            if sonuc == "Tanimlanamayan bir durum, tekrar deneyin!":
+                print(sonuc)
+                continue 
+            else:
+                print(f"\n{sonuc}\n")
+                break  
+            
     
     elif islem == "Q":
         print("Programdan cikiliyor, iyi günler dileriz!")
         break
 
     else :
-        print("Bilinmeyen bir durum olustu, tekrar deneyin!")
+        print("\nTanimlanamayan girdi, tekrar deneyin!")
 
         
 
