@@ -80,7 +80,16 @@ class HavaVerisi:
               f"Gorus Mesafesi (m) : {self.visibility}\n")
         
         
-                
+def temizle(description):
+    cevir = {
+        "ç": "c",
+        "ğ": "g",
+        "ı": "i",
+        "ö": "o",
+        "ş": "s",
+        "ü": "u"
+    }
+    return ''.join(cevir.get(harf, harf) for harf in description)                
 
 hava_listesi = []
 
@@ -92,7 +101,7 @@ for ilce in ilceler_liste:
             dt_txt = veri["dt_txt"],
             temp = veri["main"]["temp"],
             feels_like = veri["main"]["feels_like"],
-            description = veri["weather"][0]["description"],
+            description = temizle(veri["weather"][0]["description"]),
             humidity = veri["main"]["humidity"],
             pressure = veri["main"]["pressure"],
             wind_speed = veri["wind"]["speed"],
